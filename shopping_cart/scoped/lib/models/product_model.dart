@@ -1,22 +1,34 @@
 import 'package:flutter/foundation.dart';
 import 'package:scoped_model/scoped_model.dart';
 
+
 class ProductsModel extends Model {
   List<Product> productList = product_list;
-  List<Product> cartList = [];
+  List<CartItem> cartList = [];
 
   void addCartProduct(Product product) {
     print(cartList);
-    cartList.add(product);
+    int idx = find(product);
+    if(idx != -1) cartList[idx].count++;
+    else cartList.add(CartItem(product, 1));
     print(cartList);
     notifyListeners();
   }
 
-  void deleteCartProduct(Product product) {
+  void deleteCartProduct(CartItem product) {
     print(cartList);
-    cartList = cartList.where((_product) => _product.id != product.id).toList();
+    cartList = cartList.where((_product) => _product.product.id != product.product.id).toList();
     print(cartList);
     notifyListeners();
+  }
+
+  int find(Product product) {
+    for(int idx = 0; idx < cartList.length; idx++) {
+      if(product == cartList[idx].product) {
+        return idx;
+      }
+    }
+    return -1;
   }
 }
 
@@ -31,6 +43,14 @@ class Product {
   String toString() {
     return 'Product{id: $id, name: $name, price: $price}';
   }
+}
+
+
+class CartItem {
+  final Product product;
+  int count;
+
+  CartItem(this.product, this.count);
 }
 
 final List<Product> product_list = [
