@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped/widgets/cart_list.dart';
-import 'package:scoped/widgets/buttom_bar.dart';
+import 'package:scoped/widgets/bottom_bar.dart';
 
 class CartListPage extends StatelessWidget {
   @override
@@ -10,7 +10,7 @@ class CartListPage extends StatelessWidget {
         title: Text("Scoped Model"),
       ),
       body: CartList(),
-      bottomNavigationBar: ButtomBar(),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }

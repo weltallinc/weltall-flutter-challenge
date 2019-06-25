@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:bloc_model/bloc/cart_list_bloc.dart';
+import 'package:redux/redux.dart';
+import 'package:redux_model/redux/models/models.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
-class ButtomBar extends StatelessWidget {
+class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = CartListProvider.of(context);
-
-    return Container(
+    return StoreConnector<AppState, List<CartItem>>(
+        converter: (store) => store.state.cartItems,
+        builder: (context, cartItems) => Container(
           color: Colors.white,
           child: Row(
             children: <Widget>[
               Expanded(
-                  child: StreamBuilder(
-                      stream: bloc.cartItems,
-                      initialData: bloc.cartItems.value,
-                      builder: (context, cartItems) => ListTile(
+                  child: ListTile(
                     title: Text("Total:"),
-                    subtitle: Text("\$" + cartItems.data
+                    subtitle: Text("\$" + cartItems
                         .fold(0, (a, b) => a + b.product.price * b.count)
                         .toString()
                     ),
-                  ))),
+                  )),
               Expanded(
                 child: MaterialButton(
                   onPressed: () {},
@@ -30,6 +29,6 @@ class ButtomBar extends StatelessWidget {
               )
             ],
           ),
-        );
+        ));
   }
 }

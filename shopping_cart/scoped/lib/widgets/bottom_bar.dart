@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:scoped/models/product_model.dart';
 
-class ButtomBar extends StatelessWidget {
+class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<ProductsModel>(
@@ -14,7 +14,7 @@ class ButtomBar extends StatelessWidget {
                   child: ListTile(
                     title: Text("Total:"),
                     subtitle: Text("\$" + model.cartList
-                        .fold(0, (a, b) => a + b.price)
+                        .fold(0, (a, b) => a + b.product.price * b.count)
                         .toString()
                     ),
                   )),
