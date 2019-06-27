@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:bloc_model/models/models.dart';
 import 'package:bloc_model/bloc/cart_list_bloc.dart';
+import 'package:bloc_model/bloc/product_list_bloc.dart';
+import 'package:bloc_model/models/models.dart';
 
 class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = CartListProvider.of(context);
-    print(bloc);
+    final productBloc = ProductListProvider.of(context);
+    final cartBloc = CartListProvider.of(context);
+
     return StreamBuilder<List<Product>>(
-      stream: bloc.productList,
-      initialData: bloc.productList.value,
+      stream: productBloc.productList,
+      initialData: productBloc.productList.value,
       builder: (context, productList) => GridView.count(
         padding: EdgeInsets.all(4.0),
         crossAxisCount: 2,
@@ -18,7 +20,7 @@ class ProductList extends StatelessWidget {
           final product = productList.data[index];
           return ProductItemCard(
             product: product,
-            addCartProduct: bloc.addCartProduct,
+            addCartProduct: cartBloc.addCartProduct,
           );
         }),
       )

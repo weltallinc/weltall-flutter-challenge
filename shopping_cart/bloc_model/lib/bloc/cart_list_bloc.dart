@@ -16,20 +16,11 @@ class DeleteCartItem {
 
 class CartListBloc {
   List<CartItem> _cartItems = [];
-  List<Product> _productList = product_list;
+  final _items = BehaviorSubject<List<CartItem>>.seeded(const []);
 
-  final _items =
-      BehaviorSubject<List<CartItem>>.seeded(const []);
+  final _addCartProductController = PublishSubject<AddCartItem>();
 
-  final _product =
-      BehaviorSubject<List<Product>>.seeded(product_list);
-
-  final _addCartProductController =
-      PublishSubject<AddCartItem>();
-
-  final _deleteCartProductController =
-      PublishSubject<DeleteCartItem>();
-
+  final _deleteCartProductController = PublishSubject<DeleteCartItem>();
 
   CartListBloc() {
     _addCartProductController.stream.listen(addCartProduct);
@@ -38,10 +29,11 @@ class CartListBloc {
 
   void addCartProduct(product) {
     int idx = find(product);
-    if (idx != -1)
+    if (idx != -1) {
       _cartItems[idx].count++;
-    else
+    } else {
       _cartItems.add(CartItem(product, 1));
+    }
     _items.add(_cartItems);
   }
 
@@ -64,8 +56,6 @@ class CartListBloc {
   Sink<AddCartItem> get addCartItem => _addCartProductController.sink;
   Sink<DeleteCartItem> get deleteCartItem => _deleteCartProductController.sink;
   ValueObservable<List<CartItem>> get cartItems => _items.stream;
-  ValueObservable<List<Product>> get productList => _product.stream;
-
 }
 
 class CartListProvider extends InheritedWidget {
@@ -79,23 +69,10 @@ class CartListProvider extends InheritedWidget {
 
   static CartListBloc of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(CartListProvider)
-                     as CartListProvider).bloc;
+    as CartListProvider)
+        .bloc;
   }
 
   @override
-  bool updateShouldNotify(CartListProvider oldWidget) =>
-      bloc != oldWidget.bloc;
+  bool updateShouldNotify(CartListProvider oldWidget) => bloc != oldWidget.bloc;
 }
-
-final List<Product> product_list = [
-  Product(id: "1", name: "apple", price: 100),
-  Product(id: "2", name: "banana", price: 200),
-  Product(id: "3", name: "lemon", price: 300),
-  Product(id: "4", name: "solt", price: 65),
-  Product(id: "5", name: "gam", price: 10),
-  Product(id: "6", name: "nuts", price: 500),
-  Product(id: "7", name: "tubugumi", price: 100),
-  Product(id: "8", name: "oroC", price: 130),
-  Product(id: "9", name: "imokenpi", price: 100),
-  Product(id: "10", name: "chocolate", price: 200),
-];
