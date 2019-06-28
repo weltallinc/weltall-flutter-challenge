@@ -15,15 +15,15 @@ class CartList extends StatelessWidget {
             return (
                 Dismissible(
                   key: Key(cartItem.product.id),
-                  onDismissed: (direction) {
-                    model.deleteCartitem(cartItem);
-                    },
+                  onDismissed: (direction) => model.deleteCartItem(cartItem),
                   child: Row(
                     children: <Widget>[
                       Expanded(
                           child: ListTile(
                             title: Text(cartItem.product.name),
-                            subtitle: Text("count: " + cartItem.count.toString()),
+                            subtitle: Text(
+                                "count: " + cartItem.count.toString()
+                            ),
                           )
                       ),
                       Expanded(
@@ -32,7 +32,7 @@ class CartList extends StatelessWidget {
                     ]
                   )
                 )
-                );
+            );
           }),
     );
   }
