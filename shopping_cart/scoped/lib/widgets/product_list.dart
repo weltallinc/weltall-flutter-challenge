@@ -13,7 +13,8 @@ class ProductList extends StatelessWidget {
             final product = model.productList[index];
             return (ProductItemCard(product: product));
           }),
-        ));
+        )
+    );
   }
 }
 
@@ -48,7 +49,7 @@ class ProductItemCard extends StatelessWidget {
                     right: 0.0,
                     top: 130.0,
                     child: RawMaterialButton(
-                      onPressed: () => model.addCartProduct(product),
+                      onPressed: () => model.addCartItem(product),
                       shape: CircleBorder(),
                       elevation: 2.0,
                       fillColor: Colors.yellow,
@@ -56,8 +57,11 @@ class ProductItemCard extends StatelessWidget {
                         Icons.shopping_cart,
                         size: 20,
                       ),
-                    ))
+                    )
+                )
               ],
-            )));
+            )
+        )
+    );
   }
 }

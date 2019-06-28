@@ -16,7 +16,7 @@ class CartList extends StatelessWidget {
                 Dismissible(
                   key: Key(cartItem.product.id),
                   onDismissed: (direction) {
-                    model.deleteCartProduct(cartItem);
+                    model.deleteCartitem(cartItem);
                     },
                   child: Row(
                     children: <Widget>[

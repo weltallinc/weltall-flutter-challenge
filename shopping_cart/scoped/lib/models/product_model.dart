@@ -6,7 +6,7 @@ class ProductsModel extends Model {
   List<Product> productList = product_list;
   List<CartItem> cartList = [];
 
-  void addCartProduct(Product product) {
+  void addCartItem(Product product) {
     print(cartList);
     int idx = find(product);
     if(idx != -1) cartList[idx].count++;
@@ -15,7 +15,7 @@ class ProductsModel extends Model {
     notifyListeners();
   }
 
-  void deleteCartProduct(CartItem product) {
+  void deleteCartitem(CartItem product) {
     print(cartList);
     cartList = cartList.where((_product) => _product.product.id != product.product.id).toList();
     print(cartList);
