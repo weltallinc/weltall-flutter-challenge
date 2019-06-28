@@ -17,7 +17,6 @@ class AppState {
     List<Product> productList,
     List<CartItem> cartItems,
   }) {
-    print("copy with!!");
     return new AppState(
         productList: productList ?? this.productList,
         cartItems: cartItems ?? this.cartItems

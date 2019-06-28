@@ -10,19 +10,17 @@ AppState appReducers(AppState state, action) {
 }
 
 final cartItemReducers = combineReducers<List<CartItem>>([
-  TypedReducer<List<CartItem>, AddItemAction>(addItem),
+  TypedReducer<List<CartItem>, AddItemAction>(addCartItem),
   TypedReducer<List<CartItem>, DeleteItemAction>(deleteCartItem),
 ]);
 
-List<CartItem> addItem(List<CartItem> itemList, AddItemAction action) {
-  print(itemList);
+List<CartItem> addCartItem(List<CartItem> itemList, AddItemAction action) {
   final product = action.product;
   int idx = find(itemList, product);
   if(idx != -1) {
     itemList[idx].count++;
     return List.from(itemList);
   } else {
-    print("add!");
     return List.from(itemList)..add(CartItem(product, 1));
   }
 }
