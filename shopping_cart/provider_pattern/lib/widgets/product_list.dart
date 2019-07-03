@@ -5,24 +5,18 @@ import 'package:provider_pattern/models/models.dart';
 class ProductListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-      Provider<ProductList>.value(
-          value: ProductList(),
-          child: Consumer<ProductList>(
-              builder: (context, value, _) {
-                final productList = value.productList;
-                return GridView.count(
-                    padding: EdgeInsets.all(4.0),
-                    crossAxisCount: 2,
-                    children: List.generate(productList.length, (index) {
-                      final product = productList[index];
-                      return ProductItemCardWidget(product: product);
-                    }
-                    )
-                );
-              }
-              )
-      );
+    return Provider<ProductList>.value(
+        value: ProductList(),
+        child: Consumer<ProductList>(builder: (context, value, _) {
+          final productList = value.productList;
+          return GridView.count(
+              padding: EdgeInsets.all(4.0),
+              crossAxisCount: 2,
+              children: List.generate(productList.length, (index) {
+                final product = productList[index];
+                return ProductItemCardWidget(product: product);
+              }));
+        }));
   }
 }
 
@@ -48,7 +42,7 @@ class ProductItemCardWidget extends StatelessWidget {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(product.name),
+                          Text(product.name + "(最大: " + product.maxQuantity.toString() + "個)"),
                           Text(product.price.toString() + " yen"),
                         ]),
                   ],

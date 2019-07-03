@@ -7,7 +7,7 @@ class CartListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Scoped Model"),
+        title: Text("Provider Pattern"),
       ),
       body: CartListWidget(),
       bottomNavigationBar: BottomBarWidget(),

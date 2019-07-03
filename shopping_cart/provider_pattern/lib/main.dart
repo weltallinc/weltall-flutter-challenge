@@ -12,7 +12,7 @@ void main() {
 class ShoppingCartApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider<CartItems>.value(
+    return ChangeNotifierProvider<CartItems>.value(
       value: CartItems(),
       child: MaterialApp(
         title: "shopping cart application by ScopedModel",

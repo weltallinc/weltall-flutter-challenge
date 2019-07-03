@@ -1,33 +1,50 @@
-
+import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 
-class CartItems {
+class CartItems with ChangeNotifier {
   List<CartItem> _cartItems = [];
   final int _cartMaxQuantity = 6;
 
   void addCartItem(Product product) {
     int idx = find(product);
-    if(idx != -1) _cartItems[idx].count++;
-    else _cartItems.add(CartItem(product, 1));
+    final numberOfItem = _cartItems.fold(0, (a, b) => a + b.count);
+    print(numberOfItem);
+    if ((idx != -1 && !enableAddItem(_cartItems[idx])) ||
+        numberOfItem + 1 > _cartMaxQuantity)
+      return;
+    else if (idx != -1)
+      _cartItems[idx].count++;
+    else
+      _cartItems.add(CartItem(product, 1));
+    notifyListeners();
   }
 
   void deleteCartItem(CartItem product) {
-    _cartItems = _cartItems.where((_product) => _product.product.id != product.product.id).toList();
+    _cartItems = _cartItems
+        .where((_product) => _product.product.id != product.product.id)
+        .toList();
+    notifyListeners();
   }
 
   int find(Product product) {
-    for(int idx = 0; idx < _cartItems.length; idx++) {
-      if(product == _cartItems[idx].product) {
+    for (int idx = 0; idx < _cartItems.length; idx++) {
+      if (product == _cartItems[idx].product) {
         return idx;
       }
     }
     return -1;
   }
 
+  bool enableAddItem(CartItem item) {
+    final numberOfItem = _cartItems.fold(0, (a, b) => a + b.count);
+
+    return (numberOfItem < _cartMaxQuantity &&
+        item.count < item.product.maxQuantity);
+  }
+
   int get cartMaxQuantity => _cartMaxQuantity;
 
   List<CartItem> get cartItems => _cartItems;
-
 }
 
 class CartItem {
@@ -35,7 +52,6 @@ class CartItem {
   int count;
 
   CartItem(this.product, this.count);
-
 }
 
 class Product {
@@ -44,7 +60,11 @@ class Product {
   final int price;
   final int maxQuantity;
 
-  Product({@required this.id, @required this.name, @required this.price, @required this.maxQuantity});
+  Product(
+      {@required this.id,
+      @required this.name,
+      @required this.price,
+      @required this.maxQuantity});
 
   @override
   String toString() {
@@ -58,7 +78,6 @@ class ProductList {
   List<Product> get productList => _productList; // = product_list;
 
 }
-
 
 final List<Product> productLList = [
   Product(id: "1", name: "apple", price: 100, maxQuantity: 1),
