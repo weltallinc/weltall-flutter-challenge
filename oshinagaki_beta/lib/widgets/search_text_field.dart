@@ -3,17 +3,27 @@ import 'package:provider/provider.dart';
 import 'package:oshinagaki_beta/bloc/search_bloc.dart';
 
 class SearchTextField extends StatelessWidget {
+  final List<String> _hintText = [
+    "enter oshinagaki name",
+    "enter event name",
+    "enter user ID or username",
+  ];
+
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<SearchBloc>(context);
     return StreamBuilder(
-      stream: bloc.searchText,
-      builder: (context, _) => TextField(
-        decoration: InputDecoration(
-          hintText: 'Enter a search term',
-        ),
-        onChanged: bloc.onChangeText,
-      ),
+      stream: bloc.tabIndex,
+      initialData: bloc.tabIndex.value,
+      builder: (context, index) {
+        final hintText = _hintText[index.data];
+        return TextField(
+          decoration: InputDecoration(
+            hintText: hintText,
+          ),
+          onSubmitted: bloc.onSubmitText,
+        );
+      }
     );
   }
 }
