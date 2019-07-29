@@ -6,7 +6,6 @@ import 'package:oshinagaki_beta/models/user_state.dart';
 import 'package:oshinagaki_beta/bloc/search_bloc.dart';
 
 class SearchResult extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<SearchBloc>(context);
@@ -15,30 +14,30 @@ class SearchResult extends StatelessWidget {
         stream: bloc.tabIndex,
         builder: (context, _index) {
           final index = _index.data;
-          if(index == 0) return menuList(bloc);
-          else if(index == 1) return eventList(bloc);
-          else if(index == 2) return userList(bloc);
-        }
-    );
+          if (index == 0)
+            return menuList(bloc);
+          else if (index == 1)
+            return eventList(bloc);
+          else if (index == 2) return userList(bloc);
+        });
   }
 
   Widget menuList(SearchBloc bloc) {
     return StreamBuilder(
-      stream: bloc.menuResult,
-      initialData: bloc.menuResult.value,
-      builder: (context, snapshot) {
-        final menuList = snapshot.data;
-        return ListView.builder(
-          itemCount: menuList.length,
-          itemBuilder: (context, index) {
-            final MenuState menu = menuList[index];
-            return Card(
-              child: Text(menu.itemName),
-            );
-          },
-        );
-      }
-    );
+        stream: bloc.menuResult,
+        initialData: bloc.menuResult.value,
+        builder: (context, snapshot) {
+          final menuList = snapshot.data;
+          return ListView.builder(
+            itemCount: menuList.length,
+            itemBuilder: (context, index) {
+              final MenuState menu = menuList[index];
+              return Card(
+                child: Text(menu.menuName),
+              );
+            },
+          );
+        });
   }
 
   Widget eventList(SearchBloc bloc) {
@@ -51,13 +50,18 @@ class SearchResult extends StatelessWidget {
             itemCount: eventList.length,
             itemBuilder: (context, index) {
               final event = eventList[index];
-              return Card(
-                child: Text(event.eventName),
-              );
+              return GestureDetector(
+                  onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EventDetailsPage(event)),
+                      ),
+                  child: Card(
+                    child: Text(event.eventName),
+                  ));
             },
           );
-        }
-    );
+        });
   }
 
   Widget userList(SearchBloc bloc) {
@@ -75,7 +79,30 @@ class SearchResult extends StatelessWidget {
               );
             },
           );
-        }
+        });
+  }
+}
+
+class EventDetailsPage extends StatelessWidget {
+  final EventState event;
+
+  EventDetailsPage(this.event);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(event.eventName),
+      ),
+      body: Center(
+          child: Column(
+            children: <Widget>[
+              Text("Event name: " + event.eventName),
+              Text("Event place: " + event.place),
+              Text("Event date: " + event.date),
+            ],
+          )
+      ),
     );
   }
 }
