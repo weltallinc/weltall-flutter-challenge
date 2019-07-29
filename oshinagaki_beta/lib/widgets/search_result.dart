@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:oshinagaki_beta/screens/MenuDetailPage.dart';
-import 'package:oshinagaki_beta/screens/EventDetailPage.dart';
-import 'package:oshinagaki_beta/screens/UserDetailPage.dart';
+import 'package:oshinagaki_beta/screens/menu_detail_page.dart';
+import 'package:oshinagaki_beta/screens/event_detail_page.dart';
+import 'package:oshinagaki_beta/screens/user_detail_page.dart';
 import 'package:oshinagaki_beta/models/menu_state.dart';
 import 'package:oshinagaki_beta/models/event_state.dart';
 import 'package:oshinagaki_beta/models/user_state.dart';
@@ -89,35 +89,12 @@ class SearchResult extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => UserDetailsPage(user)),
                   ),
+                  child: Container(
                   child: Card(
                     child: Text(user.userName),
-                  ));
+                  )));
             },
           );
         });
-  }
-}
-
-class EventDetailsPage extends StatelessWidget {
-  final EventState event;
-
-  EventDetailsPage(this.event);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(event.eventName),
-      ),
-      body: Center(
-          child: Column(
-            children: <Widget>[
-              Text("Event name: " + event.eventName),
-              Text("Event place: " + event.place),
-              Text("Event date: " + event.date),
-            ],
-          )
-      ),
-    );
   }
 }
