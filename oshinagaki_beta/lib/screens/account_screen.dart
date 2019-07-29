@@ -57,8 +57,6 @@ class AccountScreen extends StatelessWidget {
               ),
             ],
           ),
-          Text("flsjf;wlejf"),
-          Text("f;lwjef;le"),
         ],
       ),
     );
