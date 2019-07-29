@@ -28,11 +28,9 @@ class SearchResult extends StatelessWidget {
       initialData: bloc.menuResult.value,
       builder: (context, snapshot) {
         final menuList = snapshot.data;
-        if(menuList.length == 0) return Text("");
         return ListView.builder(
           itemCount: menuList.length,
           itemBuilder: (context, index) {
-            // print("index length: " + index.toString());
             final MenuState menu = menuList[index];
             return Card(
               child: Text(menu.itemName),
@@ -44,22 +42,15 @@ class SearchResult extends StatelessWidget {
   }
 
   Widget eventList(SearchBloc bloc) {
-    print(bloc.eventResult.value);
     return StreamBuilder(
         stream: bloc.eventResult,
         initialData: bloc.eventResult.value,
         builder: (context, snapshot) {
           final eventList = bloc.eventResult.value;
-          print(eventList);
-          if(eventList.length == 0) return Text("");
-          // print("event list: " + eventList.length.toString());
           return ListView.builder(
             itemCount: eventList.length,
             itemBuilder: (context, index) {
-              // print("index length: " + index.toString());
-              // print(eventList[index]);
               final event = eventList[index];
-              // print(event);
               return Card(
                 child: Text(event.eventName),
               );
@@ -74,14 +65,11 @@ class SearchResult extends StatelessWidget {
         stream: bloc.userResult,
         initialData: bloc.userResult.value,
         builder: (context, snapshot) {
-          final userList = snapshot.data;
-          if(userList.length == 0) return Text("");
+          final List<UserState> userList = snapshot.data;
           return ListView.builder(
             itemCount: userList.length,
             itemBuilder: (context, index) {
-              print("index length: " + index.toString());
-              print(userList[index]);
-              final user = userList[index];
+              final UserState user = userList[index];
               return Card(
                 child: Text(user.userName),
               );

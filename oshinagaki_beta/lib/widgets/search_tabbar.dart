@@ -37,7 +37,7 @@ class SearchTabBarState extends State<SearchTabBar>
               unselectedLabelColor: Colors.black12,
               labelColor: Colors.blue,
               tabs: tabs,
-              onTap: bloc.changeTabId,
+              onTap: bloc.changeTabIndex,
           ),
         )
     );
