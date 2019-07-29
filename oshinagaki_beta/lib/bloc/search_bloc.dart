@@ -6,7 +6,6 @@ import 'package:oshinagaki_beta/models/menu_state.dart';
 
 
 class SearchBloc {
-  int _searchTabIndex = 0;
   List<MenuState> _menus = [];
   List<EventState> _events = [];
   List<UserState> _users = [];
@@ -24,7 +23,7 @@ class SearchBloc {
 
 
   // Function
-  void changeTabId(int id) {
+  void changeTabIndex(int id) {
     _tabIndex.sink.add(id);
   }
 
@@ -49,7 +48,10 @@ class SearchBloc {
   }
 
   void dispose() {
-
+    _tabIndex.close();
+    _userList.close();
+    _menuList.close();
+    _eventList.close();
   }
 }
 

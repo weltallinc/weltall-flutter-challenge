@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:oshinagaki_beta/screens/MenuDetailPage.dart';
+import 'package:oshinagaki_beta/screens/EventDetailPage.dart';
+import 'package:oshinagaki_beta/screens/UserDetailPage.dart';
 import 'package:oshinagaki_beta/models/menu_state.dart';
 import 'package:oshinagaki_beta/models/event_state.dart';
 import 'package:oshinagaki_beta/models/user_state.dart';
@@ -32,9 +35,15 @@ class SearchResult extends StatelessWidget {
             itemCount: menuList.length,
             itemBuilder: (context, index) {
               final MenuState menu = menuList[index];
-              return Card(
-                child: Text(menu.menuName),
-              );
+              return GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MenuDetailsPage(menu)),
+                  ),
+                  child: Card(
+                    child: Text(menu.menuName),
+                  ));
             },
           );
         });
@@ -74,9 +83,15 @@ class SearchResult extends StatelessWidget {
             itemCount: userList.length,
             itemBuilder: (context, index) {
               final UserState user = userList[index];
-              return Card(
-                child: Text(user.userName),
-              );
+              return GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UserDetailsPage(user)),
+                  ),
+                  child: Card(
+                    child: Text(user.userName),
+                  ));
             },
           );
         });
