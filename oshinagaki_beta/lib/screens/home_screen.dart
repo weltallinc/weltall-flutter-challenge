@@ -70,7 +70,7 @@ class RankingListView extends StatelessWidget {
       child: Card(
         child: Column(
           children: <Widget>[
-            Text(menu.itemName),
+            Text(menu.menuName),
             Image.network(menu.imageUrl),
           ],
         ),
@@ -115,7 +115,7 @@ class RecommendationListView extends StatelessWidget {
       child: Card(
         child: Column(
           children: <Widget>[
-            Text(menu.itemName),
+            Text(menu.menuName),
             Image.network(menu.imageUrl),
           ],
         ),
@@ -177,7 +177,7 @@ class PremiumListView extends StatelessWidget {
       child: Card(
         child: Column(
           children: <Widget>[
-            Text(menu.itemName),
+            Text(menu.menuName),
             Image.network(menu.imageUrl),
           ],
         ),
