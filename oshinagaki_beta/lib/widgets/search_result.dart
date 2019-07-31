@@ -41,9 +41,13 @@ class SearchResult extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => MenuDetailsPage(menu)),
                   ),
-                  child: Card(
-                    child: Text(menu.menuName),
-                  ));
+                child: Column(
+                  children: <Widget>[
+                    Text(menu.menuName),
+                    Text("(" + menu.userName + ")"),
+                    imageWidget(menu.imageUrl)
+                  ],
+                ),);
             },
           );
         });
@@ -65,9 +69,13 @@ class SearchResult extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => EventDetailsPage(event)),
                       ),
-                  child: Card(
-                    child: Text(event.eventName),
-                  ));
+                child: Column(
+                  children: <Widget>[
+                    Text(event.eventName),
+                    Text(event.date),
+                    imageWidget(event.imageUrl)
+                  ],
+                ),);
             },
           );
         });
@@ -91,10 +99,29 @@ class SearchResult extends StatelessWidget {
                   ),
                   child: Container(
                   child: Card(
-                    child: Text(user.userName),
+                    child: Column(
+                      children: <Widget>[
+                        Text(user.userName),
+                        Text(user.userId),
+                        imageWidget(user.imageUrl),
+                      ],
+                    ),
+
                   )));
             },
           );
         });
   }
+}
+
+Widget imageWidget(String imageUrl) {
+  return Container(
+    width: 110,
+    height: 110,
+    decoration: BoxDecoration(
+      image: DecorationImage(
+          image: NetworkImage(
+              imageUrl)),
+    ),
+  );
 }
