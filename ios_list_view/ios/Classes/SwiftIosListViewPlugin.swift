@@ -99,8 +99,11 @@ class ReorderView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
-        cell.textLabel?.text = "menuID: " + self.menuId![indexPath.row] + ", menuName: " + self.menuName[indexPath.row]
+        // let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell1")
+        cell.textLabel?.text = self.menuName[indexPath.row]
+        cell.detailTextLabel?.textColor = UIColor.brown
+        cell.detailTextLabel?.text = self.menuId[indexPath.row]
         cell.imageView?.image = UIImage(url: self.menuImageUrl[indexPath.row])
         return cell
     }
