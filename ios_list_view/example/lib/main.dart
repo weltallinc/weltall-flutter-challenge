@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ios_list_view/ios_list_view.dart';
 
-void main() => runApp(MaterialApp(home: ActivityIndicatorExample()));
+void main() => runApp(MaterialApp(home: IosListViewExample()));
 
-class ActivityIndicatorExample extends StatelessWidget {
+class IosListViewExample extends StatelessWidget {
   IosListViewController controller;
 
-  void _onActivityIndicatorControllerCreated(IosListViewController _controller) {
+  void _onIosListViewControllerCreated(IosListViewController _controller) {
     controller = _controller;
   }
 
@@ -23,10 +23,10 @@ class ActivityIndicatorExample extends StatelessWidget {
             height: 800,
             child: IosListView(
               hexColor: "FF0000",
-              onIosListViewWidgetCreated: _onActivityIndicatorControllerCreated,
+              onIosListViewWidgetCreated: _onIosListViewControllerCreated,
               menuId: ["1", "2", "3", "4"],
               menuName: ["neko", "inu", "saru", "kizi"],
-              menuImageUrl: ["aaa", "aaa", "aaa", "aaa"],
+              menuImageUrl: ["https://mi-journey.jp/foodie/wp-content/uploads/2017/03/1703_61_warabi_1.jpg", "https://mi-journey.jp/foodie/wp-content/uploads/2017/03/1703_61_warabi_1.jpg", "https://mi-journey.jp/foodie/wp-content/uploads/2017/03/1703_61_warabi_1.jpg", "https://mi-journey.jp/foodie/wp-content/uploads/2017/03/1703_61_warabi_1.jpg"],
             ),
           ),
         ],
