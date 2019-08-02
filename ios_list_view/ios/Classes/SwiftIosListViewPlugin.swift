@@ -53,11 +53,6 @@ public class IosListVIewController: NSObject, FlutterPlatformView {
 
     func onMethodCall(call: FlutterMethodCall, result: @escaping FlutterResult) {
         let method = call.method
-        if method == "start" {
-            // self.indicator.startAnimating()
-        } else if method == "stop" {
-            // self.indicator.stopAnimating()
-        }
     }
 }
 
@@ -81,6 +76,7 @@ class ReorderView: UIView, UITableViewDataSource, UITableViewDelegate {
         setup()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
@@ -102,14 +98,6 @@ class ReorderView: UIView, UITableViewDataSource, UITableViewDelegate {
         return self.menuId.count
     }
 
-    /*func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! CustomTableViewCell
-        cell.textLabel?.text = "menuID: " + self.menuId![indexPath.row] + ", menuName: " + self.menuName[indexPath.row]
-        cell.myImageView.image = getImageByUrl(url: self.menuImageUrl[indexPath.row])
-        cell.myTextView.text = self.menuName[indexPath.row]
-        return cell
-    }*/
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as UITableViewCell
         cell.textLabel?.text = "menuID: " + self.menuId![indexPath.row] + ", menuName: " + self.menuName[indexPath.row]

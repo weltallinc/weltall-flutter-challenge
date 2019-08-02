@@ -66,11 +66,4 @@ class IosListViewController {
 
   final MethodChannel _channel;
 
-  Future<void> start() async {
-    return _channel.invokeMethod('start');
-  }
-
-  Future<void> stop() async {
-    return _channel.invokeMethod('stop');
-  }
 }
